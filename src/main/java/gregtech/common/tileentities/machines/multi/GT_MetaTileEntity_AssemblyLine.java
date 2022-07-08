@@ -28,7 +28,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlockAnyMeta;
@@ -174,7 +173,7 @@ public class GT_MetaTileEntity_AssemblyLine extends GT_MetaTileEntity_EnhancedMu
         int[] tStack = null;
         int[] tFluids = null;
         boolean foundRecipe = false;
-        
+
         nextDataStick:
         for (ItemStack tDataStick : tDataStickList) {
         	GT_AssemblyLineUtils.LookupResult tLookupResult = GT_AssemblyLineUtils.findAssemblyLineRecipeFromDataStick(tDataStick, false);
@@ -190,11 +189,11 @@ public class GT_MetaTileEntity_AssemblyLine extends GT_MetaTileEntity_EnhancedMu
                     continue;
                 }
             }
-        	
+
         	// So here we check against the recipe found on the data stick.
         	// If we run into missing buses/hatches or bad inputs, we go to the next data stick.
         	// This check only happens if we have a valid up to date data stick.
-        	
+
         	// Check Inputs allign
             int aItemCount = tRecipe.mInputs.length;
             tStack = new int[aItemCount];
@@ -212,7 +211,7 @@ public class GT_MetaTileEntity_AssemblyLine extends GT_MetaTileEntity_EnhancedMu
                     GT_FML_LOGGER.info("Item: " + i + " accepted");
                 }
             }
-            
+
             // Check Fluid Inputs allign
         	int aFluidCount = tRecipe.mFluidInputs.length;
             tFluids = new int[aFluidCount];
@@ -231,7 +230,7 @@ public class GT_MetaTileEntity_AssemblyLine extends GT_MetaTileEntity_EnhancedMu
                     }
                 }
             }
-        	
+
         	if (GT_Values.D1) {
         		GT_FML_LOGGER.info("Check overclock");
         	}
@@ -244,18 +243,18 @@ public class GT_MetaTileEntity_AssemblyLine extends GT_MetaTileEntity_EnhancedMu
         		continue;
         	}
         	if (GT_Values.D1) {
-        		GT_FML_LOGGER.info("Find available recipe");             
+        		GT_FML_LOGGER.info("Find available recipe");
         	}
             mOutputItems = new ItemStack[] {tRecipe.mOutput};
             foundRecipe = true;
         	break ;
         }
-        
+
         // Best not to run this recipe.
         if (!foundRecipe || tStack.length <= 0) {
         	return false;
         }
-        
+
 
         if (GT_Values.D1) {
         	GT_FML_LOGGER.info("All checked start consuming inputs");
